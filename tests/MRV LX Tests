@@ -1,0 +1,311 @@
+BAD PASSWORD:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'test', 'password': 'test', 'secret': 'test'}
+net_connect = netmiko.ConnectHandler(**device)
+
+    net_connect = netmiko.ConnectHandler(**device)
+  File "/usr/lib/python2.7/site-packages/netmiko/ssh_dispatcher.py", line 180, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/netmiko/base_connection.py", line 207, in __init__
+    self.establish_connection()
+  File "/usr/lib/python2.7/site-packages/netmiko/base_connection.py", line 698, in establish_connection
+    raise NetMikoAuthenticationException(msg)
+netmiko.ssh_exception.NetMikoAuthenticationException: Authentication failure: unable to connect mrv_lx good:22
+Authentication failed.
+
+
+
+BAD SECRET:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'test'}
+net_connect = netmiko.ConnectHandler(**device)
+
+    net_connect = netmiko.ConnectHandler(**device)
+  File "/usr/lib/python2.7/site-packages/netmiko/ssh_dispatcher.py", line 180, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/netmiko/base_connection.py", line 208, in __init__
+    self.session_preparation()
+  File "/usr/lib/python2.7/site-packages/netmiko/mrv/mrv_lx.py", line 15, in session_preparation
+    self.enable()
+  File "/usr/lib/python2.7/site-packages/netmiko/mrv/mrv_lx.py", line 35, in enable
+    raise ValueError(msg)
+ValueError: Failed to enter enable mode. Please ensure you pass the 'secret' argument to ConnectHandler.
+
+
+
+TIMEOUT:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'test', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'good'}
+net_connect = netmiko.ConnectHandler(**device)
+
+    net_connect = netmiko.ConnectHandler(**device)
+  File "/usr/lib/python2.7/site-packages/netmiko/ssh_dispatcher.py", line 180, in ConnectHandler
+    return ConnectionClass(*args, **kwargs)
+  File "/usr/lib/python2.7/site-packages/netmiko/base_connection.py", line 207, in __init__
+    self.establish_connection()
+  File "/usr/lib/python2.7/site-packages/netmiko/base_connection.py", line 693, in establish_connection
+    raise NetMikoTimeoutException(msg)
+netmiko.ssh_exception.NetMikoTimeoutException: Connection to device timed-out: mrv_lx test:22
+
+
+
+Connected:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'good'}
+net_connect = netmiko.ConnectHandler(**device)
+
+No errors
+
+
+
+Connected with command:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'good'}
+net_connect = netmiko.ConnectHandler(**device)
+result = net_connect.send_command('show port async summary')
+print(result)
+
+Time:                                       Sun, 17 Jun 2018 15:31:45 US/C
+
+Port       Port Name        Access    Speed  TCP Port  SSH port     Device
+  1       port name        Remote     9600     2100      2122      /dev/ttyGN0 
+  2       port name        Remote     9600     2200      2222      /dev/ttyGN1 
+  3       port name        Remote     9600     2300      2322      /dev/ttyGN2 
+  4       port name        Remote     9600     2400      2422      /dev/ttyGN3 
+  5       port name        Remote     9600     2500      2522      /dev/ttyGN4 
+  6       port name        Remote     9600     2600      2622      /dev/ttyGN5 
+  7       port name        Remote     9600     2700      2722      /dev/ttyGN6 
+  8       port name        Remote     9600     2800      2822      /dev/ttyGN7 
+  9       port name        Remote     9600     2900      2922      /dev/ttyGN8 
+ 10       port name        Remote     9600     3000      3022      /dev/ttyGN9 
+ 11       port name        Remote     9600     3100      3122     /dev/ttyGN10 
+ 12       port name        Remote     9600     3200      3222     /dev/ttyGN11 
+ 13       port name        Remote     9600     3300      3322     /dev/ttyGN12 
+ 14       port name        Remote     9600     3400      3422     /dev/ttyGN13 
+ 15       port name        Remote     9600     3500      3522     /dev/ttyGN14 
+ 16       port name        Remote     9600     3600      3622     /dev/ttyGN15 
+ 17       port name        Remote     9600     3700      3722     /dev/ttyGN16 
+ 18       port name        Remote     9600     3800      3822     /dev/ttyGN17 
+ 19       port name        Remote     9600     3900      3922     /dev/ttyGN18 
+ 20       port name        Remote     9600     4000      4022     /dev/ttyGN19 
+ 21       port name        Remote     9600     4100      4122     /dev/ttyGN20 
+ 22       port name        Remote     9600     4200      4222     /dev/ttyGN21 
+ 23       port name        Remote     9600     4300      4322     /dev/ttyGN22 
+ 24       port name        Remote     9600     4400      4422     /dev/ttyGN23 
+ 25       port name        Remote     9600     4500      4522     /dev/ttyGN24 
+ 26       port name        Remote     9600     4600      4622     /dev/ttyGN25 
+ 27       port name        Remote     9600     4700      4722     /dev/ttyGN26 
+ 28       port name        Remote     9600     4800      4822     /dev/ttyGN27 
+ 29       port name        Remote    19200     4900      4922     /dev/ttyGN28 
+ 30       port name        Remote     9600     5000      5022     /dev/ttyGN29 
+ 31       port name        Remote     9600     5100      5122     /dev/ttyGN30 
+ 32       port name        Remote    19200     5200      5222     /dev/ttyGN31 
+ 33       port name        Remote     9600     5300      5322     /dev/ttyGN32 
+ 34       port name        Remote    19200     5400      5422     /dev/ttyGN33 
+ 35       port name        Remote    19200     5500      5522     /dev/ttyGN34 
+ 36       port name        Remote     9600     5600      5622     /dev/ttyGN35 
+ 37       port name        Remote     9600     5700      5722     /dev/ttyGN36 
+ 38       port name        Remote     9600     5800      5822     /dev/ttyGN37 
+ 39       port name        Remote    19200     5900      5922     /dev/ttyGN38 
+ 40       port name        Remote     9600     6000      6022     /dev/ttyGN39 
+ 41       port name        Remote     9600     6100      6122     /dev/ttyGN40 
+ 42       port name        Remote     9600     6200      6222     /dev/ttyGN41 
+ 43       port name        Remote     9600     6300      6322     /dev/ttyGN42 
+ 44       port name        Remote     9600     6400      6422     /dev/ttyGN43 
+ 45       port name        Remote     9600     6500      6522     /dev/ttyGN44 
+ 46       port name        Remote     9600     6600      6622     /dev/ttyGN45 
+ 47       port name        Remote     9600     6700      6722     /dev/ttyGN46 
+ 48       port name        Remote     9600     6800      6822     /dev/ttyGN47
+ 
+ 
+ 
+ Connected with bad command:
+ 
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'good'}
+net_connect = netmiko.ConnectHandler(**device)
+result = net_connect.send_command('show port summary')
+
+ -----------------------------------^
+Syntax Error
+
+
+
+show configuration:
+
+import netmiko
+device = {'device_type': 'mrv_lx', 'ip': 'good', 'port': 22, 'username': 'good', 'password': 'good', 'secret': 'good'}
+net_connect = netmiko.ConnectHandler(**device)
+result = net_connect.send_command('show configuration')
+print(result)
+
+Interface.IpAddress.0       TYPE IPADDR        value
+Interface.IpMask.0          TYPE IPADDR        value
+Interface.IpBroadcast.0     TYPE IPADDR        value
+System.ConfigVersion.0      TYPE INTEGER       value
+System.SystemName.0         TYPE STRING        value
+System.SystemLocation.0     TYPE STRING        value
+System.TimeZone.0           TYPE STRING        value
+System.Snmp.0               TYPE BOOL          value
+System.Telnet.0             TYPE BOOL          value
+System.SnmpContact.0        TYPE STRING        value
+System.Gateway1.0           TYPE IPADDR        value
+System.SnmpUserName.0       TYPE STRING        value
+System.SnmpUserAuthProtocol.0 TYPE SHORT       value
+System.SnmpUserAuthPassword.0 TYPE STRING      value
+System.SnmpUserPrivProtocol.0 TYPE SHORT       value
+System.SnmpGroupName.0      TYPE STRING        value
+System.SnmpGroupSecName.0   TYPE STRING        value
+System.SnmpGroupSecModel.0  TYPE SHORT         value
+System.SnmpAccessGroupName.0 TYPE STRING       value
+System.SnmpAccessSecModel.0 TYPE SHORT         value
+System.SnmpAccessSecLevel.0 TYPE SHORT         value
+System.SnmpAccessReadView.0 TYPE STRING        value
+System.SnmpAccessCtxMatch.0 TYPE SHORT         value
+System.SnmpViewName.0       TYPE STRING        value
+System.SnmpViewSubtree.0    TYPE INTEGERSTRING value
+System.SnmpViewSubtreeLen.0 TYPE SHORT         value
+System.SnmpViewMask.0       TYPE OCTETSTRING   value
+System.SnmpViewMaskLen.0    TYPE SHORT         value
+System.SnmpViewType.0       TYPE SHORT         value
+Subscriber.SuperPassword.0  TYPE PASSWORD      value
+Subscriber.Name.0           TYPE STRING        value
+Subscriber.SubStat.0        TYPE BOOL          value
+Subscriber.SecurityV3.0     TYPE INTEGER       value
+Subscriber.RemoteAccessList.0 TYPE OCTET       value
+Subscriber.MaxSubs.0        TYPE OCTET         value
+Subscriber.ShaPassword.0    TYPE PASSWORD      value
+Subscriber.DesPassword.0    TYPE PASSWORD      value
+Subscriber.Prompt.0         TYPE STRING        value
+Subscriber.MenuName.0       TYPE STRING        value
+Subscriber.GUIMenuName.0    TYPE STRING        value
+Subscriber.Name.1           TYPE STRING        value
+Subscriber.SubStat.1        TYPE BOOL          value
+Subscriber.SecurityV3.1     TYPE INTEGER       value
+Subscriber.RemoteAccessList.1 TYPE OCTET       value
+Subscriber.ShaPassword.1    TYPE PASSWORD      value
+Subscriber.DesPassword.1    TYPE PASSWORD      value
+Subscriber.Prompt.1         TYPE STRING        value
+Subscriber.MenuName.1       TYPE STRING        value
+Subscriber.GUIMenuName.1    TYPE STRING        value
+Ethernet.EthSpeed.0         TYPE BOOL          value
+Ethernet.EthDuplex.0        TYPE BOOL          value
+Async.Name.0                TYPE STRING        value
+Async.FlowCont.0            TYPE BOOL          value
+Async.OutAuthType.0         TYPE BOOL          value
+Async.Name.1                TYPE STRING        value
+Async.FlowCont.1            TYPE BOOL          value
+Async.DSRWait.1             TYPE BOOL          value
+Async.OutAuthType.1         TYPE BOOL          value
+Async.Name.2                TYPE STRING        value
+Async.FlowCont.2            TYPE BOOL          value
+Async.DSRWait.2             TYPE BOOL          value
+Async.OutAuthType.2         TYPE BOOL          value
+Async.Name.3                TYPE STRING        value
+Async.FlowCont.3            TYPE BOOL          value
+Async.AutoHang.3            TYPE BOOL          value
+Async.DSRWait.3             TYPE BOOL          value
+Async.OutAuthType.3         TYPE BOOL          value
+Async.Name.4                TYPE STRING        value
+Async.OutAuthType.4         TYPE BOOL          value
+Async.Name.5                TYPE STRING        value
+Async.OutAuthType.5         TYPE BOOL          value
+Async.Name.6                TYPE STRING        value
+Async.DSRWait.6             TYPE BOOL          value
+Async.OutAuthType.6         TYPE BOOL          value
+Async.Name.7                TYPE STRING        value
+Async.OutAuthType.7         TYPE BOOL          value
+Async.Name.8                TYPE STRING        value
+Async.OutAuthType.8         TYPE BOOL          value
+Async.Name.9                TYPE STRING        value
+Async.OutAuthType.9         TYPE BOOL          value
+Async.Name.10               TYPE STRING        value
+Async.OutAuthType.10        TYPE BOOL          value
+Async.Name.11               TYPE STRING        value
+Async.OutAuthType.11        TYPE BOOL          value
+Async.Name.12               TYPE STRING        value
+Async.OutAuthType.12        TYPE BOOL          value
+Async.Name.13               TYPE STRING        value
+Async.OutAuthType.13        TYPE BOOL          value
+Async.Name.14               TYPE STRING        value
+Async.FlowCont.14           TYPE BOOL          value
+Async.DSRWait.14            TYPE BOOL          value
+Async.OutAuthType.14        TYPE BOOL          value
+Async.Name.15               TYPE STRING        value
+Async.OutAuthType.15        TYPE BOOL          value
+Async.Name.16               TYPE STRING        value
+Async.OutAuthType.16        TYPE BOOL          value
+Async.Name.17               TYPE STRING        value
+Async.OutAuthType.17        TYPE BOOL          value
+Async.Name.18               TYPE STRING        value
+Async.OutAuthType.18        TYPE BOOL          value
+Async.Name.19               TYPE STRING        value
+Async.OutAuthType.19        TYPE BOOL          value
+Async.Name.20               TYPE STRING        value
+Async.DSRWait.20            TYPE BOOL          value
+Async.OutAuthType.20        TYPE BOOL          value
+Async.Name.21               TYPE STRING        value
+Async.DSRWait.21            TYPE BOOL          value
+Async.OutAuthType.21        TYPE BOOL          value
+Async.Name.22               TYPE STRING        value
+Async.DSRWait.22            TYPE BOOL          value
+Async.OutAuthType.22        TYPE BOOL          value
+Async.Name.23               TYPE STRING        value
+Async.DSRWait.23            TYPE BOOL          value
+Async.OutAuthType.23        TYPE BOOL          value
+Async.Name.24               TYPE STRING        value
+Async.DSRWait.24            TYPE BOOL          value
+Async.OutAuthType.24        TYPE BOOL          value
+Async.Name.25               TYPE STRING        value
+Async.DSRWait.25            TYPE BOOL          value
+Async.OutAuthType.25        TYPE BOOL          value
+Async.Name.26               TYPE STRING        value
+Async.OutAuthType.26        TYPE BOOL          value
+Async.Name.27               TYPE STRING        value
+Async.OutAuthType.27        TYPE BOOL          value
+Async.Name.28               TYPE STRING        value
+Async.Speed.28              TYPE SPEED         value
+Async.DSRWait.28            TYPE BOOL          value
+Async.OutAuthType.28        TYPE BOOL          value
+Async.Name.29               TYPE STRING        value
+Async.DSRWait.29            TYPE BOOL          value
+Async.OutAuthType.29        TYPE BOOL          value
+Async.Name.30               TYPE STRING        value
+Async.FlowCont.30           TYPE BOOL          value
+Async.DSRWait.30            TYPE BOOL          value
+Async.OutAuthType.30        TYPE BOOL          value
+Async.Name.31               TYPE STRING        value
+Async.Speed.31              TYPE SPEED         value
+Async.DSRWait.31            TYPE BOOL          value
+Async.OutAuthType.31        TYPE BOOL          value
+Async.Name.32               TYPE STRING        value
+Async.FlowCont.32           TYPE BOOL          value
+Async.DSRWait.32            TYPE BOOL          value
+Async.OutAuthType.32        TYPE BOOL          value
+Async.Name.33               TYPE STRING        value
+Async.Speed.33              TYPE SPEED         value
+Async.DSRWait.33            TYPE BOOL          value
+Async.OutAuthType.33        TYPE BOOL          value
+Async.Name.34               TYPE STRING        value
+Async.Speed.34              TYPE SPEED         value
+Async.FlowCont.34           TYPE BOOL          value
+Async.DSRWait.34            TYPE BOOL          value
+Async.OutAuthType.34        TYPE BOOL          value
+Async.Name.35               TYPE STRING        value
+Async.FlowCont.35           TYPE BOOL          value
+Async.DSRWait.35            TYPE BOOL          value
+Async.OutAuthType.35        TYPE BOOL          value
+Async.Name.36               TYPE STRING        value
+Async.DSRWait.36            TYPE BOOL          value
+Async.OutAuthType.36        TYPE BOOL          value
+Async.DSRWait.37            TYPE BOOL          value
+Async.OutAuthType.37        TYPE BOOL          value
+Async.Speed.38              TYPE SPEED         value
+Async.FlowCont.38           TYPE BOOL          value
+Async.DSRWait.38            TYPE BOOL          value
+Async.OutAuthType.38        TYPE BOOL          value
